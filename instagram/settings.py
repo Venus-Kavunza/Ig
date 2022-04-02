@@ -31,6 +31,8 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'Ig',
+    'bootstrap3',
     'Ig.apps.NewsConfig',
     'django.contrib.admin',
     'django.contrib.auth',
