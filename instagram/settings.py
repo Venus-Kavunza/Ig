@@ -12,6 +12,9 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 
 from pathlib import Path
 import os
+import cloudinary
+import cloudinary.uploader
+import cloudinary.api
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -32,6 +35,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'cloudinary',
     'Ig',
     'bootstrap3',
     'django.contrib.admin',
@@ -131,3 +135,9 @@ STATICFILES_DIRS = [
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+cloudinary.config( 
+  cloud_name = "venusfabio", 
+  api_key = "928118823669567", 
+  api_secret = "9tvW95lcj70W6r-eUeXPXP9R2ZI" 
+)
