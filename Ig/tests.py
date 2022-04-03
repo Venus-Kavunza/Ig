@@ -60,3 +60,33 @@ class ImageTestClass(TestCase):
         self.post.delete_post()
         posts=Image.objects.all()
         self.assertTrue(len(posts)==0)  
+
+
+class CommentsTestClass(TestCase):
+    def setUp(self):
+        self.user = User(username='Softdev')
+        self.user.save()
+        self.user_profile = Profile(user=self.user,profile_picture="mypic.png")
+        self.post = Image(name="views",caption="Nyc views",user=self.user_profile)
+        self.post.save()
+        self.comment = Comments(comment="Awsome",post=self.post,user=self.user)
+        
+    def tearDown(self):
+        Image.objects.all().delete()
+        User.objects.all().delete()
+        Comments.objects.all().delete()
+        Profile.objects.all().delete()
+                    
+    def test_instance(self):
+        self.assertTrue(isinstance(self.comment,Comments))
+
+    def test_delete_comment(self):
+        self.comment.save_comment()
+        self.comment.delete_comment()
+        comments=Comments.objects.all()
+        self.assertTrue(len(comments)==0) 
+
+    def test_save_comment(self):
+        self.comment.save_comment()
+        comments=Comments.objects.all()
+        self.assertTrue(len(comments)>0)
