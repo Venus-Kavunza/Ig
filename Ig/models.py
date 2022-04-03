@@ -8,7 +8,7 @@ from django.dispatch import receiver
 # Create your models here.
 
 class Profile(models.Model):
-    user = models.OneToOneField()
+    user = models.OneToOneField(User, on_delete=models.CASCADE,primary_key=True)
     profile_picture = CloudinaryField('pictures/',default='http://res.cloudinary.com/dim8pysls/image/upload/v1639001486/x3mgnqmbi73lten4ewzv.png')
     bio = models.TextField(max_length=500, default="My Bio", blank=True)
     name = models.CharField(max_length=250, blank=True)
@@ -41,4 +41,35 @@ class Profile(models.Model):
         return cls.objects.filter(user__username__icontains=name).all()
 
 
+class Image(models.Model):
+    image = CloudinaryField('image')
+    name = models.CharField(max_length=250, blank=True)
+    caption = models.CharField(max_length=250, blank=True)
+    likes = models.ManyToManyField(User, related_name='likes', blank=True, )
+    user = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name='posts')
+    created = models.DateTimeField(auto_now_add=True, null=True)
+
+    class Meta:
+        ordering = ["-pk"]
+
+    def save_post(self):
+        self.save()
+
+    def delete_post(self):
+        self.delete()
+
+    def total_likes(self):
+        return self.likes.count()
+    
+    @classmethod
+    def get_profile_posts(cls,profile):
+        posts = Image.objects.filter(profile__pk= profile)
+        return posts
+    @classmethod
+    def update_post_caption(cls,id,caption):
+        update =cls.objects.filter(id=id).update(caption=caption)
+        return update
+
+    def __str__(self):
+        return f'{self.user.name} Post'
     
