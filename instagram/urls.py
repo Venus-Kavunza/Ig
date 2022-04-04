@@ -15,9 +15,16 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from Ig import views as insta_views
+from django.contrib.auth import views as auth_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    #path('',include('instagram.urls')),
+    path('',include('Ig.urls')),
+    path('tinymce /', include('tinymce.urls')),
+    path('accounts/register/',insta_views.register, name='register'),
+    path('accounts/login/',auth_views.LoginView.as_view(redirect_authenticated_user=True), name='login'),
+    path('logout/',auth_views.LogoutView.as_view(), name='logout'),
+    path('social-auth/',include('social_django.urls',namespace='social')),
 ]
 
