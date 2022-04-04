@@ -12,7 +12,7 @@ from django.contrib.auth import logout
 from django.views import generic 
 from cloudinary.forms import cl_init_js_callbacks
 from django.views.decorators.csrf import csrf_exempt
-#from .email import send_welcome_email
+from .email import send_welcome_email
 # Create your views here.
 
 
