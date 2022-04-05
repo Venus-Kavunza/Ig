@@ -5,7 +5,6 @@ cffi==1.15.0
 charset-normalizer==2.0.12
 cloudinary==1.29.0
 cryptography==36.0.2
-decouple==0.0.7
 defusedxml==0.7.1
 dj-database-url==0.5.0
 Django==3.2.10

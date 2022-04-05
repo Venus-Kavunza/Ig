@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 import django_heroku
 import dj_database_url
-from decouple import Config, Csv
+from decouple import config, Csv
 from pathlib import Path
 import os
 import cloudinary
@@ -173,18 +173,18 @@ LOGOUT_REDIRECT_URL = 'login'
 
 django_heroku.settings(locals())
 
-MODE=Config("MODE", default="dev")
-SECRET_KEY = Config('SECRET_KEY')
-DEBUG = Config('DEBUG', default=False, cast=bool)
+MODE=config("MODE", default="dev")
+SECRET_KEY = config('SECRET_KEY')
+DEBUG = config('DEBUG', default=False, cast=bool)
 # development
-if Config('MODE')=="dev":
+if config('MODE')=="dev":
    DATABASES = {
        'default': {
            'ENGINE': 'django.db.backends.postgresql_psycopg2',
-           'NAME': Config('DB_NAME'),
-           'USER': Config('DB_USER'),
-           'PASSWORD': Config('DB_PASSWORD'),
-           'HOST': Config('DB_HOST'),
+           'NAME': config('DB_NAME'),
+           'USER': config('DB_USER'),
+           'PASSWORD': config('DB_PASSWORD'),
+           'HOST': config('DB_HOST'),
            'PORT': '',
        }
        
@@ -193,11 +193,11 @@ if Config('MODE')=="dev":
 else:
    DATABASES = {
        'default': dj_database_url.config(
-           default=Config('DATABASE_URL')
+           default=config('DATABASE_URL')
        )
    }
 
 db_from_env = dj_database_url.config(conn_max_age=500)
 DATABASES['default'].update(db_from_env)
-ALLOWED_HOSTS = Config('ALLOWED_HOSTS', cast=Csv())
+ALLOWED_HOSTS = config('ALLOWED_HOSTS', cast=Csv())
 
