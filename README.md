@@ -5,9 +5,9 @@
 ## Description
 This is an instagram clone where I display my photos for others to see.A user can click on an image to view the image details, location and its description. A user can also copy an image link.
 
-You can view the site at:[Heroku](https://ig-clone.herokuapp.com/)
+You can view the site at:[Heroku](https://instagramcloneig.herokuapp.com/)
 
-![Landing page photo]()
+![Landing page photo](https://github.com/Venus-Kavunza/Ig/blob/master/static/images/usepage.png)
 
 
 ## User Stories
